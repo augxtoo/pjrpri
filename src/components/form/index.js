@@ -1,6 +1,7 @@
-import React, {useState} from "react";
-import { TextInput, View, Button } from "react-native"
+import React, { useState } from "react";
+import { TextInput, View, Text, TouchableOpacity } from "react-native";
 import ResultImc from "./ResultImc/index";
+import styles from "./style";
 
 export default function Form(){
 
@@ -23,7 +24,7 @@ function imcCalculator(){
            imcCalculator()
            setHeight(null)
            setWeight(null)
-           setMessageImc("imc é igual:")
+           setMessageImc(" imc é igual: ")
            setTextButton("Calcular Novamente")
            return
  
@@ -35,27 +36,32 @@ function imcCalculator(){
  }
 
  return(
-    <View>
-        <View>
-            <Text>Altura</Text>
-            <TextInput
+    <View style={styles.formContext}>
+        <View style={styles.form}>
+            <Text style={styles.formLabel}>Altura</Text>
+            <TextInput style={styles.input}
+
             onChangeText={setHeight}
             value={height}
             placeholder="EX. 1.75"
             keyboardType="numeric"
             ></TextInput>
-             <Text>Peso</Text>
-            <TextInput
+             <Text style={styles.formLabel}>Peso</Text>
+            <TextInput style={styles.input}
             onChangeText={setWeight}
             value={weight}
             placeholder="EX. 175.365"
             keyboardType="numeric"
             ></TextInput>
-        <Button 
-        onPress={() => validationImc()}
-        title={textButton}
-        color="#61dafb"/>
+        <TouchableOpacity
+       style={styles.buttomCalculator}
+       onPress={()=> {
+         validationImc()
 
+       }}
+       > <Text style={styles.textButtonCalculator}>{textButton}</Text>
+       </TouchableOpacity>
+       
         </View>
         <ResultImc messageResultImc={messageImc} resultImc={imc}/>
         </View>
